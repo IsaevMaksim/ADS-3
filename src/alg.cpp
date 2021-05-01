@@ -20,10 +20,9 @@ std::string infx2pstfx(std::string inf) {
     if (inf[i] >= '1' && inf[i] <= '9') {
       str += inf[i];
       str += ' ';
-    }
-    else if (inf[i] == '(' || pri(inf[i]) > pri(stack.get()) || stack.isEmpty())
+    } else if (inf[i] == '(' || pri(inf[i]) > pri(stack.get()) || stack.isEmpty()) {
       stack.push(inf[i]);
-    else if (inf[i] == ')') {
+    } else if (inf[i] == ')') {
       char ch;
       do {
         ch = stack.get();
@@ -32,8 +31,7 @@ std::string infx2pstfx(std::string inf) {
         str += ' ';
       } while (ch != '(');
     }
-    else {
-      while (pri(stack.get()) >= pri(inf[i]) && !stack.isEmpty()) {
+    else { while (pri(stack.get()) >= pri(inf[i]) && !stack.isEmpty()) {
         str += stack.get();
         str += ' ';
         stack.pop();
@@ -52,7 +50,7 @@ std::string infx2pstfx(std::string inf) {
 
 int eval(std::string pst) {
   TStack<char> stack;
-  for (int i=0; i<pst.length(); i++){
+  for (int i=0; i < pst.length(); i++) {
     if (pst[i] >= '1' && pst[i] <= '9')
       stack.push(pst[i] - '0');
     else if (pst[i] != ' ') {
@@ -69,6 +67,6 @@ int eval(std::string pst) {
       else
         stack.push(n1 - n2);
     }
-  }
+    }
   return stack.get();
 }
