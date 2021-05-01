@@ -17,7 +17,7 @@ std::string infx2pstfx(std::string inf) {
   TStack<char> stack;
   std::string str;
   for (int i = 0; i < inf.length(); i++) {
-    if (inf[i] >= '1' && inf[i] <= '9') {
+    if (inf[i] >= '0' && inf[i] <= '9') {
       str += inf[i];
       str += ' ';
     } else if (inf[i] == '(' || pri(inf[i]) > pri(stack.get()) || stack.isEmpty()) {
