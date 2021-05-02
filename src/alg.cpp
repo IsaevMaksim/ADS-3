@@ -7,8 +7,6 @@ int pri(char c) {
     return 3;
   else if (c == '+' || c == '-')
     return 2;
-  else if (c == ')')
-    return 1;
   else
     return 0;
 }
@@ -20,7 +18,9 @@ std::string infx2pstfx(std::string inf) {
     if (inf[i] >= '0' && inf[i] <= '9') {
       str += inf[i];
       str += ' ';
-    } else if (inf[i] == '(' || pri(inf[i]) > pri(stack.get()) || stack.isEmpty()) {
+    } else if (inf[i] == '(' 
+               || pri(inf[i]) > pri(stack.get()) 
+               || stack.isEmpty()) {
       stack.push(inf[i]);
     } else if (inf[i] == ')') {
       char ch;
@@ -30,8 +30,8 @@ std::string infx2pstfx(std::string inf) {
         str += ch;
         str += ' ';
       } while (ch != '(');
-    }
-    else { while (pri(stack.get()) >= pri(inf[i]) && !stack.isEmpty()) {
+    } else { while (pri(stack.get()) >= pri(inf[i]) 
+                    && !stack.isEmpty()) {
         str += stack.get();
         str += ' ';
         stack.pop();
