@@ -2,7 +2,7 @@
 #include <string>
 #include "tstack.h"
 
-int pri(char c) {
+static int pri(char c) {
   if (c == '*' || c == '/')
     return 3;
   else if (c == '+' || c == '-')
@@ -18,19 +18,20 @@ std::string infx2pstfx(std::string inf) {
     if (inf[i] >= '0' && inf[i] <= '9') {
       str += inf[i];
       str += ' ';
-    } else if (inf[i] == '(' 
-               || pri(inf[i]) > pri(stack.get()) 
+    } else if (inf[i] == '('
+               || pri(inf[i]) > pri(stack.get())
                || stack.isEmpty()) {
       stack.push(inf[i]);
     } else if (inf[i] == ')') {
-      char ch;
-      do {
-        ch = stack.get();
+        char ch=stack.get();
         stack.pop();
-        str += ch;
-        str += ' ';
-      } while (ch != '(');
-    } else { while (pri(stack.get()) >= pri(inf[i]) 
+        while(ch != '(') {
+          str += ch;
+          str += ' ';
+          ch = stack.get();
+          stack.pop();
+        }
+    } else { while (pri(stack.get()) >= pri(inf[i])
                     && !stack.isEmpty()) {
         str += stack.get();
         str += ' ';
