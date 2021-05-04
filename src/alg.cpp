@@ -23,9 +23,9 @@ std::string infx2pstfx(std::string inf) {
                || stack.isEmpty()) {
       stack.push(inf[i]);
     } else if (inf[i] == ')') {
-        char ch=stack.get();
+        char ch = stack.get();
         stack.pop();
-        while(ch != '(') {
+        while (ch != '(') {
           str += ch;
           str += ' ';
           ch = stack.get();
@@ -52,9 +52,9 @@ std::string infx2pstfx(std::string inf) {
 int eval(std::string pst) {
   TStack<char> stack;
   for (int i=0; i < pst.length(); i++) {
-    if (pst[i] >= '0' && pst[i] <= '9')
+    if (pst[i] >= '0' && pst[i] <= '9') {
       stack.push(pst[i] - '0');
-    else if (pst[i] != ' ') {
+    } else if (pst[i] != ' ') {
       int n2 = stack.get();
       stack.pop();
       int n1 = stack.get();
